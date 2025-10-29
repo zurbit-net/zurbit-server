@@ -5,7 +5,9 @@
       "Bash(dotnet new:*)",
       "Bash(dotnet sln:*)",
       "Bash(dotnet add:*)",
-      "Bash(docker build:*)"
+      "Bash(docker build:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test)"
     ],
     "deny": [],
     "ask": []

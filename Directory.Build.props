@@ -1,33 +1,31 @@
 <Project>
-    <PropertyGroup Label="AppInfos">
-        <Version>0.0.1</Version>
-        <AssemblyVersion>$(Version).0</AssemblyVersion>
-        <AssemblyFileVersion>$(Version).0</AssemblyFileVersion>
-        <FileVersion>$(Version).0</FileVersion>
-        <Authors>Abdulla Qeblawi and Stefan Koch</Authors>
-        <Company>zurbit.net</Company>
-        <PackageProjectUrl>https://zurbit.net</PackageProjectUrl>
-        <AssemblyTitle>zurbit server</AssemblyTitle>
-        <Product>zurbit server</Product>
-        <Description>Communation simply and beautifully!</Description>
-        <Copyright>Copyright © 2025</Copyright>
-        <RepositoryUrl>https://github.com/zurbit-net/zurbit-server</RepositoryUrl>
-        <NeutralLanguage>en</NeutralLanguage>
-    </PropertyGroup>
-    
-    <PropertyGroup Label="BuildProperties">
+  <PropertyGroup Label="ServerInfos">
+    <Version>0.0.1</Version>
+    <AssemblyVersion>$(Version).0</AssemblyVersion>
+    <AssemblyFileVersion>$(Version).0</AssemblyFileVersion>
+    <FileVersion>$(Version).0</FileVersion>
+    <Authors>Abdulla Qeblawi and Stefan Koch</Authors>
+    <Company>zurbit.net</Company>
+    <PackageProjectUrl>https://zurbit.net</PackageProjectUrl>
+    <AssemblyTitle>zurbit server</AssemblyTitle>
+    <Product>zurbit server</Product>
+    <Description>Communation simply and beautifully!</Description>
+    <Copyright>Copyright © 2025</Copyright>
+    <RepositoryUrl>https://github.com/zurbit-net/zurbit-server</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Label="BuildProperties">
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <!-- Code Quality -->
+  <PropertyGroup Label="CodeQualityProperties">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
-
-    <!-- Build Output -->
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 </Project>

@@ -249,7 +249,7 @@ dotnet_diagnostic.CA1848.severity = suggestion
 dotnet_diagnostic.CA2007.severity = none
 
 # IDE0005: Remove unnecessary usings
-dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0005.severity = suggestion
 
 # IDE0011: Add braces
 dotnet_diagnostic.IDE0011.severity = warning
