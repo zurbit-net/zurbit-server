@@ -7,6 +7,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+# Project
+.idea
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -43,12 +46,3 @@ CodeCoverage/
 
 # MSBuild Binary and Structured Log
 *.binlog
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml

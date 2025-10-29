@@ -1,0 +1,7 @@
+﻿services:
+  zurbit.server:
+    image: zurbit.server
+    build:
+      context: .
+      dockerfile: src/Zurbit.Server/Dockerfile
+
