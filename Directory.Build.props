@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://zurbit.net</PackageProjectUrl>
     <AssemblyTitle>zurbit server</AssemblyTitle>
     <Product>zurbit server</Product>
-    <Description>Communation simply and beautifully!</Description>
+    <Description>Communication simply and beautifully!</Description>
     <Copyright>Copyright © 2025</Copyright>
     <RepositoryUrl>https://github.com/zurbit-net/zurbit-server</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
