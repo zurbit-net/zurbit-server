@@ -40,7 +40,7 @@ app.MapGet("/", () =>
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.MapHub<RoomChatHub>("/roomChatHub");
+app.MapHub<MeetingRoomHub>("/roomChatHub");
 
 app.Run();
 
