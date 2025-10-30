@@ -4,4 +4,3 @@
     build:
       context: .
       dockerfile: src/Zurbit.Server/Dockerfile
-
