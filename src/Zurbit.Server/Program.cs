@@ -18,8 +18,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -39,6 +37,7 @@ app.MapGet("/", () =>
     })
     .WithName("GetWeatherForecast");
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.MapHub<RoomChatHub>("/roomChatHub");
