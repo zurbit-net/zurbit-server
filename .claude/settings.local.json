@@ -7,7 +7,8 @@
       "Bash(dotnet add:*)",
       "Bash(docker build:*)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet test)"
+      "Bash(dotnet test)",
+      "Bash(find . -type f ( -name \"*.cs\" -o -name \"*.csproj\" -o -name \"*.props\" -o -name \"*.json\" -o -name \"*.yml\" -o -name \"*.yaml\" ) -not -path \"*/bin/*\" -not -path \"*/obj/*\" -not -path \"*/.git/*\" -exec sh -c 'tail -c1 \"\"$1\"\" | read -r _ || echo >> \"\"$1\"\"' _ {} ;)"
     ],
     "deny": [],
     "ask": []
