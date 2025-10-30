@@ -1,9 +1,14 @@
+using Zurbit.Server.Hubs;
+using Zurbit.Server.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSignalR();
+builder.Services.AddControllers();
+builder.Services.AddSingleton<IMessageStore, InMemoryMessageStore>();
 
 var app = builder.Build();
 
@@ -33,6 +38,10 @@ app.MapGet("/", () =>
         return forecast;
     })
     .WithName("GetWeatherForecast");
+
+app.UseAuthorization();
+app.MapControllers();
+app.MapHub<RoomChatHub>("/roomChatHub");
 
 app.Run();
 
