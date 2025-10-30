@@ -4,11 +4,11 @@ using Zurbit.Server.Services;
 
 namespace Zurbit.Server.Hubs;
 
-public class RoomChatHub : Hub
+public class MeetingRoomHub : Hub
 {
     private readonly IMessageStore _messageStore;
 
-    public RoomChatHub(IMessageStore messageStore)
+    public MeetingRoomHub(IMessageStore messageStore)
     {
         _messageStore = messageStore;
     }
@@ -21,13 +21,16 @@ public class RoomChatHub : Hub
 
         await Clients.Caller.SendAsync("ReceiveHistory", messages);
 
-        await NotifyRoomThatNewUserHasJoined(roomName, userName);
-    }
-
-    private async Task NotifyRoomThatNewUserHasJoined(string roomName, string userName)
-    {
         var systemMessage = new Message("System", $"{userName} has joined the room.", DateTime.UtcNow);
         await Clients.Group(roomName).SendAsync("ReceiveMessage", systemMessage.UserName, systemMessage.Content, systemMessage.Timestamp);
+    }
+
+    public async Task LeaveRoom(string roomName, string userName)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
+
+        var systemMessage = new Message("System", $"{userName} has left the room.", DateTime.UtcNow);
+        await Clients.OthersInGroup(roomName).SendAsync("ReceiveMessage", systemMessage.UserName, systemMessage.Content, systemMessage.Timestamp);
     }
 
     public async Task SendMessageToGroup(string roomName, string userName, string messageContent)
