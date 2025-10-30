@@ -7,18 +7,20 @@ namespace Zurbit.Server.Hubs;
 public class MeetingRoomHub : Hub
 {
     private readonly IMessageStore _messageStore;
+    private readonly IMeetingRoomService _meetingRoomService;
 
-    public MeetingRoomHub(IMessageStore messageStore)
+    public MeetingRoomHub(IMessageStore messageStore, IMeetingRoomService meetingRoomService)
     {
         _messageStore = messageStore;
+        _meetingRoomService = meetingRoomService;
     }
 
     public async Task JoinRoom(string roomName, string userName)
     {
+        _meetingRoomService.AddUserConnection(Context.ConnectionId, userName, roomName);
         await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
 
         var messages = await _messageStore.GetMessagesForRoom(roomName);
-
         await Clients.Caller.SendAsync("ReceiveHistory", messages);
 
         var systemMessage = new Message("System", $"{userName} has joined the room.", DateTime.UtcNow);
@@ -27,6 +29,7 @@ public class MeetingRoomHub : Hub
 
     public async Task LeaveRoom(string roomName, string userName)
     {
+        _meetingRoomService.RemoveUserConnection(Context.ConnectionId);
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
 
         var systemMessage = new Message("System", $"{userName} has left the room.", DateTime.UtcNow);
@@ -36,7 +39,6 @@ public class MeetingRoomHub : Hub
     public async Task SendMessageToGroup(string roomName, string userName, string messageContent)
     {
         var newMessage = new Message(userName, messageContent, DateTime.UtcNow);
-
         await _messageStore.AddMessage(roomName, newMessage);
 
         await Clients.Group(roomName).SendAsync("ReceiveMessage", newMessage.UserName, newMessage.Content, newMessage.Timestamp);
@@ -44,13 +46,11 @@ public class MeetingRoomHub : Hub
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        // we would need a way to know which room(s) the user was in.
-        // var userConnection = _userTracker.GetUser(Context.ConnectionId);
-        // if (userConnection!= null)
-        // {
-        //     await Groups.RemoveFromGroupAsync(Context.ConnectionId, userConnection.Room);
-        //     await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", "System", $"{userConnection.UserName} has left the room.");
-        // }
+        var user = _meetingRoomService.GetUserByConnectionId(Context.ConnectionId);
+        if (user.HasValue)
+        {
+            await LeaveRoom(user.Value.RoomName, user.Value.UserName);
+        }
 
         await base.OnDisconnectedAsync(exception);
     }

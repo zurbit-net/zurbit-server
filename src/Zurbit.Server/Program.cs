@@ -9,6 +9,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IMessageStore, InMemoryMessageStore>();
+builder.Services.AddSingleton<IMeetingRoomService, MeetingRoomService>();
 
 var app = builder.Build();
 
